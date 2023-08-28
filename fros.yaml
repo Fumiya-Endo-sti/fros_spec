@@ -92,15 +92,15 @@ paths:
               Example 1:
                 value:
                   skills:
-                    - id: 0
-                      name: string
-                      level: 0
+                    - id: uuid
+                      name: HTML
+                      level: 2
                   certifications:
-                    - id: 0
+                    - id: uuid
                       name: AZ-104
                   authorities:
-                    - id: 0
-                      name: string
+                    - id: uuid
+                      name: githubの管理者
                   service_line: string
       tags:
         - users
