@@ -300,8 +300,8 @@ paths:
         - schema:
             type: string
           in: query
-          name: text
-          description: 検索内容
+          name: id
+          description: スキルのuuid
   /search/certifications:
     get:
       summary: 資格によるユーザー検索
@@ -345,8 +345,8 @@ paths:
         - schema:
             type: string
           in: query
-          name: text
-          description: 検索内容
+          name: id
+          description: 資格のuuid
       tags:
         - search
   /search/authorities:
@@ -387,8 +387,8 @@ paths:
         - schema:
             type: string
           in: query
-          name: text
-          description: 検索内容
+          name: id
+          description: 権限情報のuuid
   /search/users:
     get:
       summary: ユーザー名によるユーザ検索
@@ -400,7 +400,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: text
+          name: name
           description: 検索内容（ユーザー名）
       responses:
         '200':
