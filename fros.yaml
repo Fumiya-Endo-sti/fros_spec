@@ -77,9 +77,7 @@ paths:
                 skills:
                   type: array
                   items:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/skill'
+                    $ref: '#/components/schemas/skill'
                 certifications:
                   type: array
                   items:
@@ -88,6 +86,22 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/authority'
+                service_line:
+                  type: string
+            examples:
+              Example 1:
+                value:
+                  skills:
+                    - id: 0
+                      name: string
+                      level: 0
+                  certifications:
+                    - id: 0
+                      name: AZ-104
+                  authorities:
+                    - id: 0
+                      name: string
+                  service_line: string
       tags:
         - users
       responses:
