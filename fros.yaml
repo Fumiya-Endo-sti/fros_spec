@@ -47,15 +47,15 @@ paths:
                       email: example@sios.com
                       isAdmin: true
                     skills:
-                      - id: string
-                        name: string
+                      - id: uuid
+                        name: HTML
                         level: 0
                     certifications:
-                      - id: string
+                      - id: uuid
                         name: AZ-104
                     authorities:
-                      - id: string
-                        name: string
+                      - id: uuid
+                        name: github管理者
         '204':
           description: No Content
         '400':
@@ -135,14 +135,20 @@ paths:
                     type: array
                     description: 登録されているskillが配列で帰ってくる
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
               examples:
                 Example 1:
                   value:
                     skills:
-                      - HTML
-                      - CSS
-                      - JAVA
+                      - id: uuid
+                        name: HTML
+                      - id: uuid
+                        name: CSS
         '400':
           description: Bad Request
       operationId: get-skills
@@ -163,14 +169,20 @@ paths:
                   certifications:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
               examples:
                 Example 1:
                   value:
                     certifications:
-                      - AZ-104
-                      - AZ-204
-                      - 応用情報技術者試験
+                      - id: uuid
+                        name: 応用情報
+                      - id: uuid
+                        name: AZ-104
         '400':
           description: Bad Request
       operationId: get-certifications
@@ -191,13 +203,20 @@ paths:
                   authorities:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
               examples:
                 Example 1:
                   value:
                     authorities:
-                      - githubアカウントの管理者
-                      - Azureアカウントの管理者
+                      - id: uuid
+                        name: github管理者
+                      - id: uuid
+                        name: azure管理者
         '400':
           description: Bad Request
       operationId: get-authorities
@@ -209,6 +228,8 @@ paths:
       responses:
         '201':
           description: Created
+        '400':
+          description: Bad Request
       tags:
         - users
       description: ユーザー情報登録
@@ -416,7 +437,8 @@ components:
       description: skill
       properties:
         id:
-          type: number
+          type: string
+          description: uuid
         name:
           type: string
           description: スキル名
@@ -429,7 +451,8 @@ components:
       type: object
       properties:
         id:
-          type: number
+          type: string
+          description: uuid
         name:
           type: string
           description: 資格名
@@ -442,6 +465,7 @@ components:
       properties:
         id:
           type: string
+          description: uuid
         service_line:
           type: string
         email:
@@ -455,7 +479,8 @@ components:
       type: object
       properties:
         id:
-          type: number
+          type: string
+          description: uuid
         name:
           type: string
   responses: {}
