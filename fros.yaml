@@ -12,7 +12,7 @@ servers:
 paths:
   '/users/{userid}':
     get:
-      summary: ユーザー情報管理API
+      summary: ユーザー情報取得
       tags:
         - users
       responses:
@@ -38,6 +38,24 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/authority'
+              examples:
+                Example 1:
+                  value:
+                    info:
+                      id: string
+                      service_line: PSSL
+                      email: example@sios.com
+                      isAdmin: true
+                    skills:
+                      - id: string
+                        name: string
+                        level: 0
+                    certifications:
+                      - id: string
+                        name: AZ-104
+                    authorities:
+                      - id: string
+                        name: string
         '204':
           description: No Content
         '400':
@@ -47,7 +65,7 @@ paths:
       parameters: []
       x-internal: false
     put:
-      summary: ''
+      summary: ユーザー情報編集
       operationId: 'put-users-[userid]'
       description: ユーザー情報編集
       requestBody:
@@ -75,6 +93,10 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
     parameters:
       - schema:
           type: string
@@ -83,7 +105,7 @@ paths:
         required: true
   /skills:
     get:
-      summary: Your GET endpoint
+      summary: スキル一覧取得
       tags:
         - skills
       responses:
@@ -100,13 +122,20 @@ paths:
                     description: 登録されているskillが配列で帰ってくる
                     items:
                       type: string
+              examples:
+                Example 1:
+                  value:
+                    skills:
+                      - HTML
+                      - CSS
+                      - JAVA
         '400':
           description: Bad Request
       operationId: get-skills
       description: スキル一覧取得
   /certifications:
     get:
-      summary: Your GET endpoint
+      summary: 資格一覧取得
       tags:
         - certifications
       responses:
@@ -117,15 +146,24 @@ paths:
               schema:
                 type: object
                 properties:
-                  skill:
-                    type: string
+                  certifications:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example 1:
+                  value:
+                    certifications:
+                      - AZ-104
+                      - AZ-204
+                      - 応用情報技術者試験
         '400':
           description: Bad Request
       operationId: get-certifications
       description: 資格一覧取得
   /authorities:
     get:
-      summary: Your GET endpoint
+      summary: 権限情報一覧取得
       tags:
         - authorities
       responses:
@@ -140,13 +178,19 @@ paths:
                     type: array
                     items:
                       type: string
+              examples:
+                Example 1:
+                  value:
+                    authorities:
+                      - githubアカウントの管理者
+                      - Azureアカウントの管理者
         '400':
           description: Bad Request
       operationId: get-authorities
       description: 権限情報一覧取得
   /users:
     post:
-      summary: ''
+      summary: ユーザー情報登録
       operationId: post-users
       responses:
         '201':
@@ -172,10 +216,17 @@ paths:
                 image:
                   type: string
                   description: 画像のurl
+            examples:
+              Example 1:
+                value:
+                  id: string
+                  name: 佐藤孝太郎
+                  email: examle@sios.com
+                  image: 'https://imageurl.com'
         description: ''
   /search/skills:
     get:
-      summary: Your GET endpoint
+      summary: スキルによるユーザー検索
       tags:
         - search
       responses:
@@ -218,7 +269,7 @@ paths:
           description: 検索内容
   /search/certifications:
     get:
-      summary: Your GET endpoint
+      summary: 資格によるユーザー検索
       responses:
         '200':
           description: OK
@@ -265,7 +316,7 @@ paths:
         - search
   /search/authorities:
     get:
-      summary: Your GET endpoint
+      summary: 権限情報によるユーザ検索
       tags:
         - search
       responses:
@@ -305,7 +356,7 @@ paths:
           description: 検索内容
   /search/users:
     get:
-      summary: Your GET endpoint
+      summary: ユーザー名に夜ユーザ検索
       tags:
         - search
       operationId: get-search-users
@@ -351,14 +402,12 @@ components:
       description: skill
       properties:
         id:
-          type: string
+          type: number
         name:
           type: string
           description: スキル名
         level:
-          type: integer
-          minimum: 0
-          maximum: 5
+          type: number
     certification:
       title: certification
       x-stoplight:
@@ -366,7 +415,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: number
         name:
           type: string
           description: 資格名
@@ -381,12 +430,10 @@ components:
           type: string
         service_line:
           type: string
-        joining_day:
-          type: string
         email:
           type: string
         isAdmin:
-          type: string
+          type: boolean
     authority:
       title: authority
       x-stoplight:
@@ -394,7 +441,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: number
         name:
           type: string
   responses: {}
