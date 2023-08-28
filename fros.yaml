@@ -356,7 +356,7 @@ paths:
           description: 検索内容
   /search/users:
     get:
-      summary: ユーザー名に夜ユーザ検索
+      summary: ユーザー名によるユーザ検索
       tags:
         - search
       operationId: get-search-users
