@@ -466,12 +466,16 @@ components:
         id:
           type: string
           description: uuid
+        name:
+          type: string
         service_line:
           type: string
         email:
           type: string
         isAdmin:
           type: boolean
+        '':
+          type: string
     authority:
       title: authority
       x-stoplight:
