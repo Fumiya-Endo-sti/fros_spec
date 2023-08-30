@@ -38,24 +38,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/authority'
-              examples:
-                Example 1:
-                  value:
-                    info:
-                      id: string
-                      service_line: PSSL
-                      email: example@sios.com
-                      isAdmin: true
-                    skills:
-                      - id: uuid
-                        name: HTML
-                        level: 0
-                    certifications:
-                      - id: uuid
-                        name: AZ-104
-                    authorities:
-                      - id: uuid
-                        name: github管理者
+              examples: {}
         '204':
           description: No Content
         '400':
@@ -237,27 +220,8 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: firebaseから受け取る一意のid
-                name:
-                  type: string
-                  description: ユーザー名
-                email:
-                  type: string
-                  description: email
-                image:
-                  type: string
-                  description: 画像のurl
-            examples:
-              Example 1:
-                value:
-                  id: string
-                  name: 佐藤孝太郎
-                  email: examle@sios.com
-                  image: 'https://imageurl.com'
+              $ref: '#/components/schemas/user'
+            examples: {}
         description: ''
   /search/skills:
     get:
@@ -468,14 +432,14 @@ components:
           description: uuid
         name:
           type: string
-        service_line:
+        image:
           type: string
         email:
           type: string
+        service_line:
+          type: string
         isAdmin:
           type: boolean
-        '':
-          type: string
     authority:
       title: authority
       x-stoplight:
