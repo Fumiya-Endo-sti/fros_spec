@@ -71,20 +71,7 @@ paths:
                     $ref: '#/components/schemas/privilege'
                 service_line:
                   type: string
-            examples:
-              Example 1:
-                value:
-                  skills:
-                    - id: uuid
-                      name: HTML
-                      level: 2
-                  certifications:
-                    - id: uuid
-                      name: AZ-104
-                  authorities:
-                    - id: uuid
-                      name: githubの管理者
-                  service_line: string
+            examples: {}
       tags:
         - users
       responses:
@@ -190,14 +177,7 @@ paths:
                           type: string
                         name:
                           type: string
-              examples:
-                Example 1:
-                  value:
-                    authorities:
-                      - id: uuid
-                        name: github管理者
-                      - id: uuid
-                        name: azure管理者
+              examples: {}
         '400':
           description: Bad Request
       operationId: get-authorities
@@ -341,7 +321,7 @@ paths:
                             name:
                               type: string
                               description: ユーザー名
-                        privirage:
+                        privilege:
                           type: string
                           description: 権限情報名
         '400':
@@ -440,17 +420,16 @@ components:
           type: string
         service_line:
           type: string
-        isAdmin:
-          type: boolean
+        fros_privilege:
+          type: string
     privilege:
       title: privilege
       x-stoplight:
-        id: 6f2d6d266c7aa
+        id: hweojxr293q9n
       type: object
       properties:
         id:
           type: string
-          description: uuid
         name:
           type: string
   responses: {}
