@@ -247,6 +247,7 @@ paths:
           description: スキルのuuid
       tags:
         - users
+        - search
     parameters: []
   /users/search/certifications:
     get:
@@ -295,6 +296,7 @@ paths:
           description: 資格のuuid
       tags:
         - users
+        - search
     parameters: []
   /users/search/privileges:
     get:
@@ -336,6 +338,7 @@ paths:
           description: 権限情報のuuid
       tags:
         - users
+        - search
     parameters: []
   /user/search/name:
     get:
@@ -375,6 +378,7 @@ paths:
           description: Bad Request
       tags:
         - users
+        - search
     parameters: []
 components:
   schemas:
