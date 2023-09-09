@@ -204,11 +204,9 @@ paths:
               $ref: '#/components/schemas/user'
             examples: {}
         description: ''
-  /search/skills:
+  /users/search/skills:
     get:
       summary: スキルによるユーザー検索
-      tags:
-        - search
       responses:
         '200':
           description: OK
@@ -247,7 +245,10 @@ paths:
           in: query
           name: id
           description: スキルのuuid
-  /search/certifications:
+      tags:
+        - users
+    parameters: []
+  /users/search/certifications:
     get:
       summary: 資格によるユーザー検索
       responses:
@@ -293,12 +294,11 @@ paths:
           name: id
           description: 資格のuuid
       tags:
-        - search
-  /search/privileges:
+        - users
+    parameters: []
+  /users/search/privileges:
     get:
       summary: 権限情報によるユーザ検索
-      tags:
-        - search
       responses:
         '200':
           description: OK
@@ -334,12 +334,12 @@ paths:
           in: query
           name: id
           description: 権限情報のuuid
+      tags:
+        - users
     parameters: []
-  /search/users:
+  /user/search/name:
     get:
       summary: ユーザー名によるユーザ検索
-      tags:
-        - search
       operationId: get-search-users
       description: ユーザー名検索のAPI
       parameters:
@@ -373,6 +373,9 @@ paths:
                               description: ユーザー名
         '400':
           description: Bad Request
+      tags:
+        - users
+    parameters: []
 components:
   schemas:
     skill:
