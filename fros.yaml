@@ -34,10 +34,10 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/certification'
-                  authorities:
+                  priveleges:
                     type: array
                     items:
-                      $ref: '#/components/schemas/authority'
+                      $ref: '#/components/schemas/privilege'
               examples: {}
         '204':
           description: No Content
@@ -65,10 +65,10 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/certification'
-                authorities:
+                privileges:
                   type: array
                   items:
-                    $ref: '#/components/schemas/authority'
+                    $ref: '#/components/schemas/privilege'
                 service_line:
                   type: string
             examples:
@@ -170,11 +170,9 @@ paths:
           description: Bad Request
       operationId: get-certifications
       description: 資格一覧取得
-  /authorities:
+  /privileges:
     get:
       summary: 権限情報一覧取得
-      tags:
-        - authorities
       responses:
         '200':
           description: OK
@@ -183,7 +181,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  authorities:
+                  privileges:
                     type: array
                     items:
                       type: object
@@ -204,6 +202,9 @@ paths:
           description: Bad Request
       operationId: get-authorities
       description: 権限情報一覧取得
+      tags:
+        - privileges
+    parameters: []
   /users:
     post:
       summary: ユーザー情報登録
@@ -313,7 +314,7 @@ paths:
           description: 資格のuuid
       tags:
         - search
-  /search/authorities:
+  /search/privileges:
     get:
       summary: 権限情報によるユーザ検索
       tags:
@@ -340,7 +341,7 @@ paths:
                             name:
                               type: string
                               description: ユーザー名
-                        authority:
+                        privirage:
                           type: string
                           description: 権限情報名
         '400':
@@ -353,6 +354,7 @@ paths:
           in: query
           name: id
           description: 権限情報のuuid
+    parameters: []
   /search/users:
     get:
       summary: ユーザー名によるユーザ検索
@@ -440,10 +442,10 @@ components:
           type: string
         isAdmin:
           type: boolean
-    authority:
-      title: authority
+    privilege:
+      title: privilege
       x-stoplight:
-        id: 8hh9xxqua683z
+        id: 6f2d6d266c7aa
       type: object
       properties:
         id:
@@ -454,8 +456,8 @@ components:
   responses: {}
 security: []
 tags:
-  - name: authorities
   - name: certifications
+  - name: privileges
   - name: search
   - name: skills
   - name: users
