@@ -8,7 +8,8 @@ info:
   contact:
     name: nothing
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:8080'
+    description: 開発環境
 paths:
   '/users/{userid}':
     get:
@@ -38,11 +39,34 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/privilege'
-              examples: {}
-        '204':
-          description: No Content
+              examples:
+                Example 1:
+                  value:
+                    info:
+                      id: string
+                      name: string
+                      image: string
+                      email: string
+                      service_line: string
+                      fros_privilege: string
+                    skills:
+                      - id: string
+                        name: string
+                        level: 0
+                    certifications:
+                      - id: string
+                        name: AZ-104
+                    priveleges:
+                      - id: string
+                        name: string
         '400':
           description: Bad Request
+        '404':
+          description: |-
+            Not Found
+            userが見つからないとき
+        '500':
+          description: Internal Server Error
       operationId: 'get-users-[userid]'
       description: ユーザー情報取得
       parameters: []
@@ -71,7 +95,20 @@ paths:
                     $ref: '#/components/schemas/privilege'
                 service_line:
                   type: string
-            examples: {}
+            examples:
+              Example 1:
+                value:
+                  skills:
+                    - id: string
+                      name: string
+                      level: 0
+                  certifications:
+                    - id: string
+                      name: AZ-104
+                  privileges:
+                    - id: string
+                      name: string
+                  service_line: string
       tags:
         - users
       responses:
@@ -79,8 +116,8 @@ paths:
           description: OK
         '400':
           description: Bad Request
-        '404':
-          description: Not Found
+        '500':
+          description: Internal Server Error
     parameters:
       - schema:
           type: string
@@ -121,6 +158,8 @@ paths:
                         name: CSS
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       operationId: get-skills
       description: スキル一覧取得
   /certifications:
@@ -155,6 +194,8 @@ paths:
                         name: AZ-104
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       operationId: get-certifications
       description: 資格一覧取得
   /privileges:
@@ -180,6 +221,8 @@ paths:
               examples: {}
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       operationId: get-authorities
       description: 権限情報一覧取得
       tags:
@@ -194,6 +237,8 @@ paths:
           description: Created
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       tags:
         - users
       description: ユーザー情報登録
@@ -202,7 +247,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/user'
-            examples: {}
+            examples:
+              Example 1:
+                value:
+                  id: string
+                  name: string
+                  image: string
+                  email: string
+                  service_line: string
+                  fros_privilege: string
         description: ''
   /users/search/skills:
     get:
@@ -237,6 +290,8 @@ paths:
                             type: string
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       operationId: get-search-skills
       description: スキル検索
       parameters:
@@ -285,6 +340,8 @@ paths:
                               description: 資格の有効期限
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       operationId: get-search-certifications
       description: 資格検索
       parameters:
@@ -326,6 +383,8 @@ paths:
                           description: 権限情報名
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       operationId: get-search-authorities
       description: 権限情報検索
       parameters:
@@ -373,6 +432,8 @@ paths:
                               description: ユーザー名
         '400':
           description: Bad Request
+        '500':
+          description: Internal Server Error
       tags:
         - users
     parameters: []
