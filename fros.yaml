@@ -24,26 +24,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userResponse'
-              examples:
-                Example 1:
-                  value:
-                    info:
-                      id: string
-                      name: string
-                      image: string
-                      email: string
-                      service_line: string
-                      fros_privilege: string
-                    skills:
-                      - id: string
-                        name: string
-                        level: 0
-                    certifications:
-                      - id: string
-                        name: AZ-104
-                    priveleges:
-                      - id: string
-                        name: string
+              examples: {}
         '400':
           description: Bad Request
         '404':
@@ -77,12 +58,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/skillResponse'
-              examples:
-                Example 1:
-                  value:
-                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-                      name: string
-                      level: 1
+              examples: {}
         '400':
           description: Bad Request
         '500':
@@ -103,12 +79,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/cetificationResponse'
-              examples:
-                Example 1:
-                  value:
-                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-                      name: string
-                      expiration: string
+              examples: {}
         '400':
           description: Bad Request
         '500':
@@ -128,11 +99,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/privilegeResponse'
-              examples:
-                Example 1:
-                  value:
-                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-                      name: string
+              examples: {}
         '400':
           description: Bad Request
         '500':
@@ -339,6 +306,7 @@ components:
         id:
           type: string
           description: uuid
+          format: uuid
         level:
           type: number
     skillResponse:
@@ -364,8 +332,7 @@ components:
       properties:
         id:
           type: string
-        name:
-          type: string
+          format: uuid
     privilegeResponse:
       title: privilegeResponse
       x-stoplight:
@@ -386,10 +353,7 @@ components:
         id:
           type: string
           description: uuid
-        name:
-          type: string
-          description: 資格名
-          example: AZ-104
+          format: uuid
     cetificationResponse:
       title: cetificationResponse
       x-stoplight:
@@ -446,6 +410,18 @@ components:
           type: string
         fros_privilege:
           type: string
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/skillResponse'
+        privileges:
+          type: array
+          items:
+            $ref: '#/components/schemas/privilegeResponse'
+        certifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/cetificationResponse'
   responses: {}
 security: []
 tags:
