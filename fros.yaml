@@ -77,7 +77,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/skillResponse'
-              examples: {}
+              examples:
+                Example 1:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      name: string
+                      level: 1
         '400':
           description: Bad Request
         '500':
