@@ -23,22 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  info:
-                    $ref: '#/components/schemas/user'
-                  skills:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/skill'
-                  certifications:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/certification'
-                  priveleges:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/privilege'
+                $ref: '#/components/schemas/userResponse'
               examples:
                 Example 1:
                   value:
@@ -71,53 +56,6 @@ paths:
       description: ユーザー情報取得
       parameters: []
       x-internal: false
-    put:
-      summary: ユーザー情報編集
-      operationId: 'put-users-[userid]'
-      description: ユーザー情報編集
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                skills:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/skill'
-                certifications:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/certification'
-                privileges:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/privilege'
-                service_line:
-                  type: string
-            examples:
-              Example 1:
-                value:
-                  skills:
-                    - id: string
-                      name: string
-                      level: 0
-                  certifications:
-                    - id: string
-                      name: AZ-104
-                  privileges:
-                    - id: string
-                      name: string
-                  service_line: string
-      tags:
-        - users
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
     parameters:
       - schema:
           type: string
@@ -136,26 +74,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  skills:
-                    type: array
-                    description: 登録されているskillが配列で帰ってくる
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        name:
-                          type: string
+                type: array
+                items:
+                  $ref: '#/components/schemas/skillResponse'
               examples:
                 Example 1:
                   value:
-                    skills:
-                      - id: uuid
-                        name: HTML
-                      - id: uuid
-                        name: CSS
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      name: string
+                      level: 1
         '400':
           description: Bad Request
         '500':
@@ -173,31 +100,22 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  certifications:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        name:
-                          type: string
+                type: array
+                items:
+                  $ref: '#/components/schemas/cetificationResponse'
               examples:
                 Example 1:
                   value:
-                    certifications:
-                      - id: uuid
-                        name: 応用情報
-                      - id: uuid
-                        name: AZ-104
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      name: string
+                      expiration: string
         '400':
           description: Bad Request
         '500':
           description: Internal Server Error
       operationId: get-certifications
       description: 資格一覧取得
+      x-extension-1: null
   /privileges:
     get:
       summary: 権限情報一覧取得
@@ -207,18 +125,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  privileges:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        name:
-                          type: string
-              examples: {}
+                type: array
+                items:
+                  $ref: '#/components/schemas/privilegeResponse'
+              examples:
+                Example 1:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      name: string
         '400':
           description: Bad Request
         '500':
@@ -246,17 +160,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user'
-            examples:
-              Example 1:
-                value:
-                  id: string
-                  name: string
-                  image: string
-                  email: string
-                  service_line: string
-                  fros_privilege: string
+              $ref: '#/components/schemas/userReqest'
+            examples: {}
         description: ''
+    put:
+      summary: ''
+      operationId: put-users
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: |-
+            Not Found
+            userが見つからないとき？
+        '500':
+          description: Internal Server Error
+      description: ユーザー更新
+      tags:
+        - users
   /users/search/skills:
     get:
       summary: スキルによるユーザー検索
@@ -267,27 +190,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  list:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        user:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              description: ユーザーid
-                            name:
-                              type: string
-                              description: ユーザー名
-                        skills:
-                          type: array
-                          description: userが持っているskill一覧の配列
-                          items:
-                            type: string
+                $ref: '#/components/schemas/userResponse'
         '400':
           description: Bad Request
         '500':
@@ -312,32 +215,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  list:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        user:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              description: |
-                                ユーザーid
-                            name:
-                              type: string
-                              description: ユーザー名
-                        certification:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              description: 資格名
-                            expiration:
-                              type: string
-                              description: 資格の有効期限
+                $ref: '#/components/schemas/userReqest'
         '400':
           description: Bad Request
         '500':
@@ -362,25 +240,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  list:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        user:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              description: ユーザー名
-                            name:
-                              type: string
-                              description: ユーザー名
-                        privilege:
-                          type: string
-                          description: 権限情報名
+                $ref: '#/components/schemas/userReqest'
         '400':
           description: Bad Request
         '500':
@@ -413,23 +273,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  list:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        user:
-                          type: object
-                          description: 他のAPIと合わせるためにuserObjectの中に入れてます
-                          properties:
-                            id:
-                              type: string
-                              description: ユーザーid
-                            name:
-                              type: string
-                              description: ユーザー名
+                $ref: '#/components/schemas/userReqest'
         '400':
           description: Bad Request
         '500':
@@ -437,27 +281,106 @@ paths:
       tags:
         - users
     parameters: []
+  /users/skills:
+    put:
+      summary: ユーザースキル更新
+      operationId: put-users-skills
+      responses:
+        '200':
+          description: OK
+      description: ユーザーのスキル更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/skillRequest'
+      tags:
+        - users
+  /users/privileges:
+    put:
+      summary: ユーザー権限情報更新
+      operationId: put-users-privileges
+      responses:
+        '200':
+          description: OK
+      description: ユーザーの権限情報更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/privilegeReqest'
+      tags:
+        - users
+    parameters: []
+  /users/certifications:
+    put:
+      summary: ユーザー資格更新
+      operationId: put-users-certifications
+      responses:
+        '200':
+          description: OK
+      description: ユーザーの資格更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/certificationReqest'
+      tags:
+        - users
 components:
   schemas:
-    skill:
-      title: skill
+    skillRequest:
+      title: skillRequest
       x-stoplight:
-        id: i6jbotg7kmi6r
+        id: 792ca8ef23bb7
       type: object
       description: skill
       properties:
         id:
           type: string
           description: uuid
-        name:
-          type: string
-          description: スキル名
         level:
           type: number
-    certification:
-      title: certification
+    skillResponse:
+      title: skillResponse
       x-stoplight:
-        id: h52jsyru8x4k2
+        id: psb5stvi2zg2n
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        level:
+          type: number
+          maximum: 4
+          minimum: 1
+    privilegeReqest:
+      title: privilegeReqest
+      x-stoplight:
+        id: 299425a98218f
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    privilegeResponse:
+      title: privilegeResponse
+      x-stoplight:
+        id: 4nt339fvsh0q7
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    certificationReqest:
+      title: certificationRequest
+      x-stoplight:
+        id: 3a9e55306528a
       type: object
       properties:
         id:
@@ -467,10 +390,47 @@ components:
           type: string
           description: 資格名
           example: AZ-104
-    user:
-      title: user
+    cetificationResponse:
+      title: cetificationResponse
       x-stoplight:
-        id: z6f6l8b36wynu
+        id: s9ejm5twwab0t
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        expiration:
+          type: string
+    userReqest:
+      title: userReqest
+      x-stoplight:
+        id: 5b38xorcopbd0
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        image:
+          type: string
+        fros_privilege:
+          type: string
+          enum:
+            - 'None '
+            - Edit
+            - View
+        service_line_id:
+          type: number
+    userResponse:
+      title: userResponse
+      x-stoplight:
+        id: 23f6c782ee858
       type: object
       properties:
         id:
@@ -485,16 +445,6 @@ components:
         service_line:
           type: string
         fros_privilege:
-          type: string
-    privilege:
-      title: privilege
-      x-stoplight:
-        id: hweojxr293q9n
-      type: object
-      properties:
-        id:
-          type: string
-        name:
           type: string
   responses: {}
 security: []
