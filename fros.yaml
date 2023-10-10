@@ -24,7 +24,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userResponse'
-              examples: {}
+              examples:
+                Example 1:
+                  value:
+                    id: string
+                    name: string
+                    image: string
+                    email: string
+                    service_line: string
+                    fros_privilege: string
+                    skills:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        name: string
+                        level: 1
+                    privileges:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        name: string
+                    certifications:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        name: string
+                        expiration: string
         '400':
           description: Bad Request
         '404':
@@ -128,7 +147,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/userReqest'
-            examples: {}
+            examples:
+              Example 1:
+                value:
+                  id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                  name: string
+                  email: user@example.com
+                  image: string
+                  fros_privilege: 'None '
+                  service_line_id: 0
         description: ''
     put:
       summary: ''
@@ -136,6 +163,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userResponse'
         '400':
           description: Bad Request
         '404':
