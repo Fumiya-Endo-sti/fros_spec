@@ -98,7 +98,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/cetificationResponse'
-              examples: {}
+              examples:
+                Example 1:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      name: string
+                      expiration: string
         '400':
           description: Bad Request
         '500':
@@ -118,7 +123,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/privilegeResponse'
-              examples: {}
+              examples:
+                Example 1:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      name: string
         '400':
           description: Bad Request
         '500':
@@ -158,7 +167,7 @@ paths:
                   service_line_id: 0
         description: ''
     put:
-      summary: ''
+      summary: ユーザー情報更新
       operationId: put-users
       responses:
         '200':
@@ -458,6 +467,5 @@ security: []
 tags:
   - name: certifications
   - name: privileges
-  - name: search
   - name: skills
   - name: users
