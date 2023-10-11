@@ -422,6 +422,23 @@ paths:
         description: ''
       tags:
         - users
+  /servicelines:
+    get:
+      summary: サービスライン一覧取得
+      tags:
+        - serviceLines
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/servicelineRequest'
+      operationId: get-servicelines
+      description: サービスライン一覧取得
+    parameters: []
 components:
   schemas:
     skillRequest:
@@ -550,10 +567,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/cetificationResponse'
+    servicelineRequest:
+      title: servicelineRequest
+      x-stoplight:
+        id: z27mtrmhd2pq1
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
   responses: {}
 security: []
 tags:
   - name: certifications
   - name: privileges
+  - name: serviceLines
   - name: skills
   - name: users
