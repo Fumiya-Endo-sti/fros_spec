@@ -304,6 +304,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/userResponse'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
         '400':
           description: Bad Request
         '404':
@@ -315,7 +326,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/skillRequest'
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: ユーザーID
+                skills:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/skillRequest'
+        description: ''
       tags:
         - users
   /users/privileges:
@@ -340,7 +361,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/privilegeReqest'
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                privileges:
+                  format: uuid
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/privilegeReqest'
+          application/xml:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                '':
+                  type: string
+        description: ''
       tags:
         - users
     parameters: []
@@ -370,7 +410,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/certificationReqest'
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                certifications:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/certificationReqest'
+        description: ''
       tags:
         - users
 components:
