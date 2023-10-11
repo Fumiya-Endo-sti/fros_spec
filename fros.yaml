@@ -27,12 +27,12 @@ paths:
               examples:
                 Example 1:
                   value:
-                    id: string
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
                     name: string
                     image: string
-                    email: string
+                    email: user@example.com
                     service_line: string
-                    fros_privilege: string
+                    fros_privilege: None
                     skills:
                       - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
                         name: string
@@ -166,8 +166,7 @@ paths:
                   name: string
                   email: user@example.com
                   image: string
-                  fros_privilege: 'None '
-                  service_line_id: 0
+                  fros_privilege: 'None'
         description: ''
     put:
       summary: ユーザー情報更新
@@ -523,11 +522,12 @@ components:
         fros_privilege:
           type: string
           enum:
-            - 'None '
             - Edit
             - View
+            - None
         service_line_id:
           type: number
+          nullable: true
     userResponse:
       title: userResponse
       x-stoplight:
@@ -537,16 +537,22 @@ components:
         id:
           type: string
           description: uuid
+          format: uuid
         name:
           type: string
         image:
           type: string
         email:
           type: string
+          format: email
         service_line:
           type: string
         fros_privilege:
           type: string
+          enum:
+            - None
+            - Edit
+            - View
         skills:
           type: array
           items:
@@ -559,6 +565,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/userCertificationResponse'
+      description: ''
     servicelineRequest:
       title: servicelineRequest
       x-stoplight:
