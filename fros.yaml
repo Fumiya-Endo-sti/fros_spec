@@ -630,6 +630,10 @@ components:
           type: string
         fros_privilege:
           type: string
+          enum:
+            - None
+            - Edit
+            - View
   responses: {}
 security: []
 tags:
