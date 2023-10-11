@@ -166,7 +166,7 @@ paths:
                   name: string
                   email: user@example.com
                   image: string
-                  fros_privilege: 'None'
+                  fros_privilege: None
         description: ''
     put:
       summary: ユーザー情報更新
@@ -199,7 +199,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userResponse'
+                $ref: '#/components/schemas/searchUserResponse'
         '400':
           description: Bad Request
         '500':
@@ -214,6 +214,7 @@ paths:
           description: スキルのuuid
       tags:
         - users
+      x-extension-1: null
     parameters: []
   /users/search/certifications:
     get:
@@ -224,7 +225,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userReqest'
+                $ref: '#/components/schemas/searchUserResponse'
         '400':
           description: Bad Request
         '500':
@@ -249,7 +250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userReqest'
+                $ref: '#/components/schemas/searchUserResponse'
         '400':
           description: Bad Request
         '500':
@@ -282,7 +283,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userReqest'
+                $ref: '#/components/schemas/searchUserResponse'
         '400':
           description: Bad Request
         '500':
@@ -614,6 +615,21 @@ components:
         expiration:
           type: string
           format: date
+    searchUserResponse:
+      title: serchUser
+      x-stoplight:
+        id: 14c3c698252e9
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        image:
+          type: string
+        fros_privilege:
+          type: string
   responses: {}
 security: []
 tags:
