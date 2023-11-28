@@ -189,7 +189,7 @@ paths:
       description: ユーザー更新
       tags:
         - users
-  /users/search/skills:
+  '/users/search/skills/{skill-id}':
     get:
       summary: スキルによるユーザー検索
       responses:
@@ -206,17 +206,18 @@ paths:
           description: Internal Server Error
       operationId: get-search-skills
       description: スキル検索
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: id
-          description: スキルのuuid
+      parameters: []
       tags:
         - users
       x-extension-1: null
-    parameters: []
-  /users/search/certifications:
+    parameters:
+      - schema:
+          type: string
+        name: skill-id
+        in: path
+        required: true
+        description: スキルのid
+  '/users/search/certifications/{certificationid}':
     get:
       summary: 資格によるユーザー検索
       responses:
@@ -232,16 +233,17 @@ paths:
           description: Internal Server Error
       operationId: get-search-certifications
       description: 資格検索
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: id
-          description: 資格のuuid
+      parameters: []
       tags:
         - users
-    parameters: []
-  /users/search/privileges:
+    parameters:
+      - schema:
+          type: string
+        name: certificationid
+        in: path
+        required: true
+        description: 資格id
+  '/users/search/privileges/{privileges-id}':
     get:
       summary: 権限情報によるユーザ検索
       responses:
@@ -257,26 +259,22 @@ paths:
           description: Internal Server Error
       operationId: get-search-authorities
       description: 権限情報検索
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: id
-          description: 権限情報のuuid
+      parameters: []
       tags:
         - users
-    parameters: []
-  /users/search/name:
+    parameters:
+      - schema:
+          type: string
+        name: privileges-id
+        in: path
+        required: true
+        description: 権限情報のuuid
+  '/users/search/name/{username}':
     get:
       summary: ユーザー名によるユーザ検索
       operationId: get-search-users
       description: ユーザー名検索のAPI
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: name
-          description: 検索内容（ユーザー名）
+      parameters: []
       responses:
         '200':
           description: OK
@@ -290,7 +288,13 @@ paths:
           description: Internal Server Error
       tags:
         - users
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+        description: ユーザー名
   /users/skills:
     put:
       summary: ユーザースキル更新
